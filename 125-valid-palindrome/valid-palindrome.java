@@ -1,27 +1,30 @@
 class Solution {
+
+    public boolean isAlphanumeric(char ch) {
+        return Character.isLetterOrDigit(ch);
+    }
+
     public boolean isPalindrome(String s) {
-        int left = 0;
-        int right = s.length() - 1;
+        int st = 0;
+        int end = s.length() - 1;
 
-        while (left < right) {
-
-            // Move left pointer if not alphanumeric
-            while (left < right && !Character.isLetterOrDigit(s.charAt(left))) {
-                left++;
+        while (st < end) {
+            if (!isAlphanumeric(s.charAt(st))) {
+                st++;
+                continue;
             }
 
-            // Move right pointer if not alphanumeric
-            while (left < right && !Character.isLetterOrDigit(s.charAt(right))) {
-                right--;
+            if (!isAlphanumeric(s.charAt(end))) {
+                end--;
+                continue;
             }
 
-            // Compare
-            if (Character.toLowerCase(s.charAt(left)) != Character.toLowerCase(s.charAt(right))) {
+            if (Character.toLowerCase(s.charAt(st)) != Character.toLowerCase(s.charAt(end))) {
                 return false;
             }
 
-            left++;
-            right--;
+            st++;
+            end--;
         }
 
         return true;
